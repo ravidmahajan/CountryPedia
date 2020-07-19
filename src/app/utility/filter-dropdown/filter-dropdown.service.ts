@@ -1,7 +1,8 @@
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {ApiConstants} from '../../constants/api-constants';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
+import { ApiConstants } from '../../constants/api-constants';
 
 @Injectable({
   providedIn: 'root'

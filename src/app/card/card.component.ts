@@ -1,5 +1,4 @@
-import {Component, OnInit, Input, SimpleChanges, OnChanges} from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -13,5 +12,5 @@ export class CardComponent {
   @Input() nightMode: boolean;
   @Input() countryData: any;
 
-  constructor(private http: HttpClient) { }
+  constructor() { }
 }

@@ -1,21 +1,21 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http'
-import {Routes} from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { Routes } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
-import { CommonModule } from '@angular/common';
 import { FilterDropdownComponent } from './utility/filter-dropdown/filter-dropdown.component';
 import { SearchPipe } from './utility/pipe/search.pipe';
 import { ShortNamePipe } from './utility/pipe/short-name.pipe'
-import { FormsModule } from '@angular/forms';
-import { DropdownDirective } from './utility/directive/dropdown.directive';
 import { CardsDetailComponent } from './card/cards-detail/cards-detail.component';
+import { AppService } from "./app.service";
 
-const appRoutes : Routes = [
-  {path: '' , component: AppComponent},
-  {path: '/country' , component: CardsDetailComponent}
+const appRoutes: Routes = [
+  { path: '', component: AppComponent },
+  { path: '/country-detail', component: CardsDetailComponent }
 ]
 
 @NgModule({
@@ -25,7 +25,6 @@ const appRoutes : Routes = [
     FilterDropdownComponent,
     SearchPipe,
     ShortNamePipe,
-    DropdownDirective,
     CardsDetailComponent
   ],
   imports: [
@@ -34,7 +33,7 @@ const appRoutes : Routes = [
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [AppService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

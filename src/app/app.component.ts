@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {ApiConstants} from './constants/api-constants';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-root',
@@ -14,16 +15,16 @@ export class AppComponent implements OnInit {
   title = 'CountryPedia';
   countryData: any;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private appService: AppService) {
   }
 
   ngOnInit(): void {
-    this.http.get(ApiConstants.GET_ALL_COUNTRIES).subscribe((data: any[]) => {
+    this.appService.getCountriesData().subscribe((data: any[]) => {
       this.countryData = data;
     });
   }
 
-  populateFilteredData(data): void {
+  populateFilteredData(data: any): void {
     this.countryData = data;
   }
 }

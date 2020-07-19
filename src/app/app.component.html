@@ -25,11 +25,11 @@
             </div>
 
           </div>
-          <!-- <div style="color: black;">{{searchText}}</div> -->
         </div>
         <!-- Filter dropdown -->
         <div class="col-lg-5">
-          <app-filter-dropdown (filteredCountries)="populateFilteredData($event)"></app-filter-dropdown>
+          <app-filter-dropdown (filteredCountries)="populateFilteredData($event)"
+          [nightMode]="nightMode"></app-filter-dropdown>
         </div>
         <!-- Back Button -->
         <!-- <div>

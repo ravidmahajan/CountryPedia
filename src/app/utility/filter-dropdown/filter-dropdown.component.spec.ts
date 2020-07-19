@@ -8,9 +8,9 @@ describe('FilterDropdownComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FilterDropdownComponent ]
+      declarations: [FilterDropdownComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

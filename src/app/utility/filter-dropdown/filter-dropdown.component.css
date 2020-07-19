@@ -12,3 +12,28 @@
     margin-left: 1rem !important;
 }
 }
+
+
+.dropdown-menu {
+    padding: none !important;
+}
+
+
+ .night-mode {
+    color: #fff !important;
+    background-color: #111517 !important;
+  }
+
+  .night-mode:hover {
+    color: #fff !important;
+    background-color: #111517 !important;
+  }
+
+.light-mode {
+    color: #111517 !important;
+    background-color: #fff !important;
+  }
+
+  a .night-mode {
+      color: #fff !important;
+  }

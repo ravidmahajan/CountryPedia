@@ -1,9 +1,10 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, OnInit, Output, Input } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import {Observable} from 'rxjs';
-import {FilterDropdownService} from './filter-dropdown.service';
-import {ApiConstants} from '../../constants/api-constants';
-import {HttpClient} from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { FilterDropdownService } from './filter-dropdown.service';
+import { ApiConstants } from '../../constants/api-constants';
+import { HttpClient } from '@angular/common/http';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-filter-dropdown',
@@ -15,31 +16,35 @@ export class FilterDropdownComponent implements OnInit {
   selectedRegionType: any;
   defaultRegionType: any;
   countryData: any;
+
+  @Input() nightMode : boolean;
+
   @Output() filteredCountries = new EventEmitter();
 
   regions: any = [
-    {id: '0', name: 'All'},
-    {id: '0', name: 'Africa'},
-    {id: '0', name: 'Americas'},
-    {id: '0', name: 'Asia'},
-    {id: '0', name: 'Europe'},
-    {id: '0', name: 'Oceania'}];
+    { id: '0', name: 'All' },
+    { id: '0', name: 'Africa' },
+    { id: '0', name: 'Americas' },
+    { id: '0', name: 'Asia' },
+    { id: '0', name: 'Europe' },
+    { id: '0', name: 'Oceania' }];
 
-  constructor(private filterDropdownService: FilterDropdownService, private http: HttpClient) { }
+  constructor(private filterDropdownService: FilterDropdownService, private http: HttpClient,
+    private appService: AppService) { }
 
 
   ngOnInit(): void {
     this.selectedRegionType = this.regions[0];
-    this.defaultRegionType  = this.regions[0];
+    this.defaultRegionType = this.regions[0];
   }
 
   getCountriesByRegion(e): void {
     const region = e.target.value;
-    if (region == 'All'){
-      this.http.get(ApiConstants.GET_ALL_COUNTRIES).subscribe((data: any[]) => {
-        this.countryData = data.sort();
+    if (region == 'All') {
+      this.appService.getCountriesData().subscribe((data: any[]) => {
+        this.countryData = data;
       });
-    }else {
+    } else {
       this.filterDropdownService.getCountriesByRegion(region).subscribe((data) => {
         this.filteredCountries.emit(data);
       });
