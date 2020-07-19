@@ -1,0 +1,7 @@
+<div class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Filter by Region</a>
+  <div class="dropdown-menu">
+      <a href="#" class="dropdown-item" *ngFor="let region of regions"
+      (click)="getCountriesByRegion($event)" value="{{region.name}}">{{region.name}}</a>
+  </div>
+</div>

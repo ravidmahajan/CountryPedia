@@ -1,0 +1,14 @@
+.dropdown {
+    display: flex;
+}
+
+#dropdownMenuButton {
+    flex-direction: row-reverse !important;
+}
+
+@media (min-width:320px) and (max-width:576px) {
+.dropdown {
+    display: inline-block !important;
+    margin-left: 1rem !important;
+}
+}
