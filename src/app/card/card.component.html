@@ -1,0 +1,22 @@
+<!-- Resources -->
+<div>
+  <app-cards-detail></app-cards-detail>
+</div>
+
+<div class="card-container">
+  <div class="card" target="_blank" rel="noopener"
+    *ngFor=" let country of countryData | filter: searchText" (click)="onCountryClick($event)">
+    <div>
+      <img [src]="country.flag" class="card-img-top" alt="...">
+      <div class="card-body" [ngClass]="nightMode ? 'card-night-mode': 'card-light-mode'">
+        <div>
+          <p class="card-text">{{country.name | shortName:30}}</p>
+          <br />
+          <p class="card-text">Population : {{country.population}}</p>
+          <p class="card-text">Region : {{country.region}}</p>
+          <p class="card-text">Capital : {{country.capital}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

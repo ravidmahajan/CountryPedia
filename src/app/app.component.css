@@ -1,0 +1,114 @@
+  .spacer {
+    flex: 1;
+  }
+
+  .toolbar {
+    position: relative;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    border-bottom: 0.1rem solid black;
+  }
+
+  .content {
+    display: flex;
+    margin: 82px auto 32px;
+    padding: 0 16px;
+    max-width: 960px;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container {
+    padding-top: 1rem;
+  }
+  .light-mode {
+    color: #fff;
+    /* box-shadow: #ebe5e5; */
+  }
+  
+  .night-mode {
+    background-color: #292c37;
+    /* box-shadow: #2c3325; */
+  }
+  
+  button {
+    border: none;
+    outline: none;
+  }
+
+  .night-mode-color {
+    background-color: #292c37;
+    color: #fff !important;
+  }
+
+  .light-mode-color {
+    background-color: #fff;
+    color: #111517 !important;
+  }
+
+  .light-mode-font-color {
+   color: #111517 !important
+  }
+
+  .add-on {
+    position: absolute;
+    top: 3px;
+    left: 8px;
+    z-index: 100;
+   }
+
+   .light-mode-search-color {
+     color: lightgray;
+   }
+
+   .night-mode-search-box {
+    box-shadow: #2c3325;
+   }
+
+   .light-mode-search-box {
+    box-shadow: #ebe5e5 !important;
+   }
+
+   .form-control {
+    width: 60%;
+   }
+
+   .row {
+     padding-left: 10rem;
+     padding-right: 10rem;
+   }
+
+   .search-button {
+    padding-left: 2rem;
+    padding-top: 0.2rem;
+   }
+
+   .input-box {
+    padding-left: 2rem;
+    margin-left: 2rem;
+    width: 60%;
+   }
+
+   @media (min-width:320px) and (max-width:576px) {
+
+    .row {
+      display: initial;
+    }
+
+    .input-box {
+      margin-left: 1rem;
+    }
+   }
+
+   @media (min-width:320px) and (max-width:991px) {
+
+    input {
+      margin-bottom: 1rem;
+    }
+   }
