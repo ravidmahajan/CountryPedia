@@ -1,0 +1,22 @@
+.card-detail {
+    display: flex;
+}
+
+.show-image {
+    padding-right: 7rem;
+}
+
+
+.night-mode{
+    color: #fff !important;
+    background-color: #292c37 !important;
+  }
+
+  .light-mode {
+    color: #111517 !important;
+    background-color: #fff !important;
+  }
+
+  .show-image .night-mode {
+      background-color: #292c37;
+  }

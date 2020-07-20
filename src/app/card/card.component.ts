@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
+import { Component,EventEmitter, Output, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-card',
@@ -6,11 +6,17 @@ import { Component, OnInit, Input, SimpleChanges, OnChanges } from '@angular/cor
   styleUrls: ['./card.component.css']
 })
 export class CardComponent {
-  countryDataFilter: any = [];
+  countryDetail: boolean= false;
 
   @Input() searchText: string;
   @Input() nightMode: boolean;
   @Input() countryData: any;
+  @Output() selectedCountry = new EventEmitter();
 
   constructor() { }
+
+  onCountryClick(country: any): void {
+    this.selectedCountry.emit(country)
+
+  }
 }

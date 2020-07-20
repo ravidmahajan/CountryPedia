@@ -12,35 +12,34 @@
   </div>
   <div class="container">
     <div class="row">
-        <div class="col-lg-7" style="padding-left: 0; ">
-          <!-- Search form -->
-          <div>
-            <div class="md-form mt-0">
-              <span class="add-on search-button"
-                [ngClass]="nightMode? 'night-mode-search-color': 'light-mode-search-color'"><i
-                  class="fa fa-search"></i></span>
-              <input class="form-control mr-sm-2 input-box"
-                [ngClass]="nightMode? 'night-mode-search-box': 'light-mode-search-box'"
-                placeholder="Search for a country" type="search" [(ngModel)]="searchText">
-            </div>
-
+      <div class="col-lg-7" style="padding-left: 0; ">
+        <!-- Search form -->
+        <div>
+          <div class="md-form mt-0">
+            <span class="add-on search-button"
+              [ngClass]="nightMode? 'night-mode-search-color': 'light-mode-search-color'"><i
+                class="fa fa-search"></i></span>
+            <input class="form-control mr-sm-2 input-box"
+              [ngClass]="nightMode? 'night-mode-search-box': 'light-mode-search-box'" placeholder="Search for a country"
+              type="search" [(ngModel)]="searchText">
           </div>
+
         </div>
-        <!-- Filter dropdown -->
-        <div class="col-lg-5">
-          <app-filter-dropdown (filteredCountries)="populateFilteredData($event)"
-          [nightMode]="nightMode"></app-filter-dropdown>
-        </div>
-        <!-- Back Button -->
-        <!-- <div>
-        <button
-        [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'"><span>
-          <i class="fas fa-long-arrow-alt-left" [ngClass]="nightMode? '': 'light-mode-font-color'" aria-hidden="true"></i>
-        </span>Back</button>
-         </div> -->
-      <div class="content" role="main">
-        <app-card [countryData]="countryData" [searchText]="searchText" [nightMode]="nightMode"></app-card>
       </div>
+      <!-- Filter dropdown -->
+      <div class="col-lg-5">
+        <app-filter-dropdown (filteredCountries)="populateFilteredData($event)" [nightMode]="nightMode">
+        </app-filter-dropdown>
+      </div>
+     
+      <div>
+        <app-cards-detail [selectedCountry]="selectedCountry" [nightMode]="nightMode"></app-cards-detail>
+      </div>
+      <div class="content" role="main">
+        <app-card [countryData]="countryData" [searchText]="searchText" [nightMode]="nightMode"
+        (selectedCountry)="selectedCountryData($event)"></app-card>
+      </div>
+
     </div>
   </div>
 </div>

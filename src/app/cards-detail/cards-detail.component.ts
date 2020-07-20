@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-cards-detail',
@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./cards-detail.component.css']
 })
 export class CardsDetailComponent implements OnInit {
+
+  @Input() selectedCountry: any = [];
+  @Input() nightMode: boolean;
 
   constructor() { }
 

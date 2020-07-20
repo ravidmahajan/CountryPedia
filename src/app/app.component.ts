@@ -9,7 +9,7 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
+  selectedCountry: any = [];
   searchText: any;
   nightMode = false;
   title = 'CountryPedia';
@@ -26,5 +26,9 @@ export class AppComponent implements OnInit {
 
   populateFilteredData(data: any): void {
     this.countryData = data;
+  }
+
+  selectedCountryData(e: any): void {
+    this.selectedCountry = e;
   }
 }
