@@ -1,16 +1,45 @@
 <!-- Resources -->
-<div class="card-container">
-  <div *ngIf="!countryDetail">
-    <div class="card" target="_blank" rel="noopener" *ngFor="let country of countryData | filter: searchText">
-      <div (click)="onCountryClick(country)">
-        <img [src]="country.flag" class="card-img-top" alt="...">
-        <div class="card-body" [ngClass]="nightMode ? 'card-night-mode': 'card-light-mode'">
+<div class="container" [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'">
+  <div>
+    <div class="components">
+      <div>
+        <!-- Search form -->
+        <div>
           <div>
-            <p class="card-text">{{country.name | shortName:30}}</p>
-            <br />
-            <p class="card-text">Population : {{country.population}}</p>
-            <p class="card-text">Region : {{country.region}}</p>
-            <p class="card-text">Capital : {{country.capital}}</p>
+            <span class="search-icon" [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'"><i
+                class="fa fa-search"></i></span>
+            <input [ngClass]="nightMode? 'nightmode-box': 'lightmode-box'" placeholder="Search for a country"
+              type="text" [(ngModel)]="searchText">
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Filter dropdown -->
+      <div class="filter">
+        <app-filter-dropdown (filteredCountries)="populateFilteredData($event)" [nightMode]="nightMode">
+        </app-filter-dropdown>
+      </div>
+    </div>
+
+    <div class="content" role="main">
+      <div class="card-container">
+        <div class="alignment">
+          <div class="card" target="_blank" rel="noopener" routerLink="/alpha/{{country.alpha2Code.toLowerCase()}}"
+            *ngFor="let country of countryData | filter: searchText"
+            [ngClass]="nightMode ? 'nightmode-box': 'lightmode-box'">
+            <div (click)="onCountryClick(country)">
+              <img [src]="country.flag" class="card-img-top" alt="...">
+              <div class="card-body" [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'">
+                <div>
+                  <p class="card-text">{{country.name | shortName:30}}</p>
+                  <br />
+                  <p class="card-text">Population : {{country.population}}</p>
+                  <p class="card-text">Region : {{country.region}}</p>
+                  <p class="card-text">Capital : {{country.capital}}</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

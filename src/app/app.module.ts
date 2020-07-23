@@ -14,8 +14,8 @@ import { CardsDetailComponent } from './cards-detail/cards-detail.component';
 import { AppService } from "./app.service";
 
 const appRoutes: Routes = [
-  { path: '', component: AppComponent },
-  { path: 'country', component: CardsDetailComponent }
+  { path: '', component: CardComponent },
+  { path: 'alpha/:country', component: CardsDetailComponent }
 ]
 
 @NgModule({

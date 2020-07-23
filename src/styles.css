@@ -1,15 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
-
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+.lightmode-box {
+    background-color: #fff;
+    color: #111517 !important;
+    box-shadow: 0 3px 3px 3px #ebe5e5;
 }
 
-body {
-    font-family: "Lato", sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.7;
-    color: #777;
-} */
+.nightmode-box {
+    box-shadow: 0 3px 3px 3px #2c3235;
+    background-color: #292c37;
+    color: #fff !important;
+}
+
+
+.light-mode-font-color {
+    color: #111517 !important
+   }
+
+   
+   .night-mode-color {
+    background-color: #292c37;
+    color: #fff !important;
+  }
+
+  .light-mode-color {
+    background-color: #fff;
+    color: #111517 !important;
+  }

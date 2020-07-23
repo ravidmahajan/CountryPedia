@@ -1,7 +1,7 @@
-<div class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown"  [ngClass]="nightMode? 'night-mode': 'light-mode'">Filter by Region</a>
-  <div class="dropdown-menu"  [ngClass]="nightMode? 'night-mode': 'light-mode'">
-    <a href="#" class="dropdown-item"  [ngClass]="nightMode? 'night-mode': 'light-mode'"
+<div class="dropdown" [ngClass]="nightMode? 'nightmode-box': 'lightmode-box'">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown"  [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'">Filter by Region</a>
+  <div class="dropdown-menu">
+    <a href="#" class="dropdown-item"  [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'"
     *ngFor="let region of regions" (click)="getCountriesByRegion($event)"
       value="{{region.name}}">{{region.name}}</a>
   </div>

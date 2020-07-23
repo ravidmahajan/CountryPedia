@@ -1,9 +1,9 @@
 <div>
   <!-- Back Button -->
   <div>
-    <button [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'"><span>
+    <button (click)="goBack()" [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'"><span>
         <i class="fas fa-long-arrow-alt-left" [ngClass]="nightMode? '': 'light-mode-font-color'" aria-hidden="true"></i>
-      </span >Back</button>
+      </span>Back</button>
   </div>
   <div class="card-detail" [ngClass]="nightMode ? 'night-mode': 'light-mode'">
     <div class="show-image" [ngClass]="nightMode ? 'night-mode': 'light-mode'">

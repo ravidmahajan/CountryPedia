@@ -11,7 +11,7 @@ import { AppService } from './app.service';
 export class AppComponent implements OnInit {
   selectedCountry: any = [];
   searchText: any;
-  nightMode = false;
+  nightMode;
   title = 'CountryPedia';
   countryData: any;
 
@@ -19,16 +19,14 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appService.getCountriesData().subscribe((data: any[]) => {
-      this.countryData = data;
+    
+    this.appService.getMode().subscribe((data)=> {
+      this.nightMode = data;
     });
   }
-
-  populateFilteredData(data: any): void {
-    this.countryData = data;
-  }
-
+  
   selectedCountryData(e: any): void {
     this.selectedCountry = e;
   }
+
 }

@@ -1,5 +1,9 @@
 .dropdown {
+    width: 100%;
     display: flex;
+    padding: 0.5rem;
+    /* margin-left: 5rem; */
+    border: 1px solid #ced4da;
 }
 
 #dropdownMenuButton {
@@ -9,7 +13,7 @@
 @media (min-width:320px) and (max-width:576px) {
 .dropdown {
     display: inline-block !important;
-    margin-left: 1rem !important;
+    margin-left: 0;
 }
 }
 
@@ -36,4 +40,8 @@
 
   a .night-mode {
       color: #fff !important;
+  }
+
+  .dropdown-toggle::after {
+    margin-left: 1.255em;
   }
