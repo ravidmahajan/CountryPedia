@@ -1,36 +1,42 @@
-<div>
+<div [ngClass]="nightMode ? 'night-mode': 'light-mode'">
   <!-- Back Button -->
   <div>
-    <button (click)="goBack()" [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'"><span>
-        <i class="fas fa-long-arrow-alt-left" [ngClass]="nightMode? '': 'light-mode-font-color'" aria-hidden="true"></i>
+    <button (click)="goBack()" [ngClass]="nightMode? 'nightmode-box': 'lightmode-box'"><span>
+        <i class="fa fa-arrow-left margin-align" [ngClass]="nightMode? '': 'light-mode-font-color'" aria-hidden="true"></i>
       </span>Back</button>
   </div>
   <div class="card-detail" [ngClass]="nightMode ? 'night-mode': 'light-mode'">
     <div class="show-image" [ngClass]="nightMode ? 'night-mode': 'light-mode'">
-      <img [src]="selectedCountry.flag" style="height: 300px; width: 400px;" alt="...">
+      <img [src]="selectedCountry.flag" alt="{{selectedCountry.flag}}">
     </div>
-    <div>
-      <h2>{{selectedCountry.name}}</h2>
+    <div class="align">
+      <h4>{{selectedCountry.name}}</h4>
       <div>
-        <p class="card-text"><strong>Native Name :</strong> {{selectedCountry.nativeName}}</p>
-        <p class="card-text"><strong>Population :</strong> {{selectedCountry.population}}</p>
-        <p class="card-text"><strong>Region :</strong> {{selectedCountry.region}}</p>
+        <div class="contents-align">
+          <div class="margin-space">
+            <p class="card-text"><strong>Native Name :</strong> {{selectedCountry.nativeName}}</p>
+            <p class="card-text"><strong>Population :</strong> {{selectedCountry.population}}</p>
+            <p class="card-text"><strong>Region :</strong> {{selectedCountry.region}}</p>
 
-        <p class="card-text"><strong>Sub Region :</strong> {{selectedCountry.subregion}}</p>
-        <p class="card-text"><strong>Capital :</strong> {{selectedCountry.capital}}</p>
-      </div>
-      <div>
-        <p class="card-text"><strong>Level Domains :</strong> {{selectedCountry.topLevelDomain}}</p>
+            <p class="card-text"><strong>Sub Region :</strong> {{selectedCountry.subregion}}</p>
+            <p class="card-text"><strong>Capital :</strong> {{selectedCountry.capital}}</p>
+          </div>
+          <div>
+            <p class="card-text"><strong>Top Level Domains :</strong> {{selectedCountry.topLevelDomain}}</p>
 
-        <div class="card-text"><strong>Currencies :</strong>
-          <div *ngFor="let currency of selectedCountry.currencies">
-            {{currency.name}}
+            <div class="card-text"><strong>Currencies :</strong>
+              <span *ngFor="let currency of selectedCountry.currencies">
+                {{currency.name}}
+              </span>
+            </div>
+            <div class="card-text"><strong>Languages : </strong>
+              <span *ngFor="let language of selectedCountry.languages">
+              {{language.name}}</span>
+            </div>
           </div>
         </div>
-        <div class="card-text"><strong>Languages : </strong>
-          <div *ngFor="let language of selectedCountry.languages">
-            {{language.name}}</div>
-        </div>
+      </div>
+      <div>
         <p class="card-text"><strong>Border Countries :</strong> {{selectedCountry.borders}}</p>
       </div>
     </div>

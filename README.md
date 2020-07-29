@@ -25,3 +25,13 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+Journey Description:-
+
+We have initial page where we show all the country data.
+We can use search bar to filter countries based on country name.
+Also we can use filter dropdown countries based on region.
+
+On selecting country you get navigate to country details page where one can see all the details of selected country.
+User can navigate back to initial page using back button

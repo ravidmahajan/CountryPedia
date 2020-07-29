@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
   title = 'CountryPedia';
   countryData: any;
 
-  constructor(private http: HttpClient, private appService: AppService) {
+  constructor(private http: HttpClient, public appService: AppService) {
   }
 
   ngOnInit(): void {
