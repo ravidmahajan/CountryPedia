@@ -1,8 +1,9 @@
-<div [ngClass]="nightMode ? 'night-mode': 'light-mode'">
+<div [ngClass]="nightMode ? 'night-mode': 'light-mode'" *ngIf="showPage">
   <!-- Back Button -->
   <div>
     <button (click)="goBack()" [ngClass]="nightMode? 'nightmode-box': 'lightmode-box'"><span>
-        <i class="fa fa-long-arrow-left margin-align" [ngClass]="nightMode? '': 'light-mode-font-color'" aria-hidden="true"></i>
+        <i class="fa fa-long-arrow-left margin-align" [ngClass]="nightMode? '': 'light-mode-font-color'"
+          aria-hidden="true"></i>
       </span>Back</button>
   </div>
   <div class="card-detail" [ngClass]="nightMode ? 'night-mode': 'light-mode'">
@@ -32,10 +33,10 @@
             </div>
             <div class="card-text crop"><strong>Languages : </strong>
               <div *ngFor="let language of selectedCountry.languages">
-              <span>
-              {{ language.name}} </span>
-              <span>{{',' }} </span>
-            </div>
+                <span>
+                  {{ language.name}} </span>
+                <span>{{',' }} </span>
+              </div>
             </div>
           </div>
         </div>
@@ -44,8 +45,9 @@
         <div class="card-text">
           <div class="borders">
             <strong class="strong-border">Border Countries : </strong>
-          <span  class="border-align" [ngClass]="nightMode? 'nightmode-box': 'lightmode-box'" *ngFor="let borderCountry of selectedCountry.borders">
-          {{borderCountry}}</span>
+            <span class="border-align" [ngClass]="nightMode? 'nightmode-box': 'lightmode-box'"
+              *ngFor="let borderCountry of selectedCountry.borders">
+              {{borderCountry}}</span>
           </div>
         </div>
         <!-- <p class="card-text"><strong>Border Countries :</strong> {{selectedCountry.borders}}</p> -->

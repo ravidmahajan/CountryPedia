@@ -1,27 +1,25 @@
 .lightmode-box {
-    background-color: #fff;
-    color: #111517 !important;
-    box-shadow: 0 3px 3px 3px #ebe5e5;
+  background-color: #fff;
+  color: #111517 !important;
+  box-shadow: 0 3px 3px 3px #ebe5e5;
 }
 
 .nightmode-box {
-    box-shadow: 0 3px 3px 3px #2c3235;
-    background-color: #292c37;
-    color: #fff !important;
+  box-shadow: 0 3px 3px 3px #2c3235;
+  background-color: #292c37;
+  color: #fff !important;
 }
 
-
 .light-mode-font-color {
-    color: #111517 !important
-   }
+  color: #111517 !important
+}
 
-   
-   .night-mode-color {
-    background-color: #292c37;
-    color: #fff !important;
-  }
+.night-mode-color {
+  background-color: #292c37;
+  color: #fff !important;
+}
 
-  .light-mode-color {
-    background-color: #fff;
-    color: #111517 !important;
-  }
+.light-mode-color {
+  background-color: #fff;
+  color: #111517 !important;
+}

@@ -1,9 +1,11 @@
 import { Component, OnInit, Input, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NgxSpinnerService } from "ngx-spinner";
 import { Location } from '@angular/common';
-import { CardsDetailService } from '../cards-detail/card-detail.service';
 import { Subscription } from 'rxjs';
+
 import { AppService } from '../app.service';
+import { CardsDetailService } from '../cards-detail/card-detail.service';
 
 @Component({
   selector: 'app-cards-detail',
@@ -16,14 +18,16 @@ export class CardsDetailComponent implements OnInit, OnDestroy {
   countryCode: string;
   paramsSubscription: Subscription;
   selectedCountry: any = [];
-
-  nightMode;
+  showPage: boolean;
+  nightMode: boolean;
 
   constructor(private router: Router, private route: ActivatedRoute, private location: Location,
-    private cardsDetailService: CardsDetailService, private appService:AppService) { }
+    private cardsDetailService: CardsDetailService, private appService: AppService, private SpinnerService: NgxSpinnerService) { }
 
   ngOnInit(): void {
-    this.appService.getMode().subscribe((data)=> {
+    this.showPage = false;
+    this.SpinnerService.show();
+    this.appService.getMode().subscribe((data) => {
       this.nightMode = data;
     });
 
@@ -31,9 +35,14 @@ export class CardsDetailComponent implements OnInit, OnDestroy {
       (params: Params) => {
         this.countryCode = params['country'];
       });
+
     this.cardsDetailService.getCountryInfo(this.countryCode).subscribe((data) => {
-      this.selectedCountry = data;
-      console.log("this.selectedCountry =>",this.selectedCountry )
+      setTimeout(() => {
+        this.selectedCountry = data;
+        this.SpinnerService.hide();
+        this.showPage = true;
+      })
+
     });
   }
 
@@ -44,8 +53,4 @@ export class CardsDetailComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.paramsSubscription.unsubscribe();
   }
-
-
-
-
 }

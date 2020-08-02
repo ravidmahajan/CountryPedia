@@ -27,18 +27,16 @@
   .container {
     padding-top: 1rem;
   }
+
   .light-mode {
     color: #fff;
-    /* box-shadow: #ebe5e5; */
   }
-  
+
   .night-mode {
     background-color: #292c37;
-    /* box-shadow: #2c3325; */
   }
-  
+
   button {
     border: none;
     outline: none;
   }
-

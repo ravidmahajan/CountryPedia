@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { Routes ,RouterModule} from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { NgxSpinnerModule } from "ngx-spinner";  
 
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
@@ -33,6 +34,7 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    NgxSpinnerModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [AppService, CardService],

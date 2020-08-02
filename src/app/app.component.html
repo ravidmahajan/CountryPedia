@@ -1,4 +1,4 @@
-<div [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'">
+<div [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'" *ngIf="showPage">
   <!-- Header -->
   <div class="toolbar" [ngClass]="nightMode? 'nightmode-box-shadow': 'lightmode-box-shadow'" role="banner">
     <div class="spacer"></div>
@@ -10,4 +10,7 @@
     </div>
   </div>
 </div>
+<ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
+  <p style="color: white">Please Wait. </p>  
+  </ngx-spinner>   
 <router-outlet></router-outlet>

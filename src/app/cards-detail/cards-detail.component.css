@@ -1,88 +1,82 @@
 .card-detail {
-    display: flex;
+  display: flex;
 }
 
+.night-mode {
+  color: #fff !important;
+  background-color: #292c37 !important;
+}
 
-.night-mode{
-    color: #fff !important;
-    background-color: #292c37 !important;
-  }
+.light-mode {
+  color: #111517 !important;
+  background-color: #fff !important;
+}
 
-  .light-mode {
-    color: #111517 !important;
-    background-color: #fff !important;
-  }
+.show-image .night-mode {
+  background-color: #292c37;
+}
 
-  .show-image .night-mode {
-      background-color: #292c37;
-  }
+.card-detail {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+}
 
-  .card-detail {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: space-evenly;
-  }
+.night-mode-color {
+  background-color: #292c37;
+  color: #fff !important;
+}
 
-  .night-mode-color {
-    background-color: #292c37;
-    color: #fff !important;
-  }
+.light-mode-color {
+  background-color: #fff;
+  color: #111517 !important;
+}
 
-  .light-mode-color {
-    background-color: #fff;
-    color: #111517 !important;
-  }
-  
-  .light-mode-font-color {
-    color: #111517 !important
-   }
- 
-   button {
-       margin-right: 2rem;
-       margin-top: 2rem;
-       margin-bottom: 2rem;
-   }
+.light-mode-font-color {
+  color: #111517 !important
+}
 
-   .contents-align {
-     display: flex;
-     flex-direction: row;
-     flex-wrap: wrap;
-     justify-content: center;
-     align-items: flex-start;
-     margin-bottom: 3rem;
-   }
+button {
+  margin-right: 2rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
 
-   .margin-space {
-     margin-right: 2rem;
-   }
+.contents-align {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+}
 
-   img {
-     margin-left: 4rem;
-     margin-right: 4rem;
-     margin-bottom: 4rem;
-   }
+.margin-space {
+  margin-right: 2rem;
+}
 
-   p {
-     margin-bottom: 0;
-   }
+img {
+  margin-left: 4rem;
+  margin-right: 4rem;
+  margin-bottom: 4rem;
+}
 
-   h4 {
-     font-weight: 1000;
-   }
+p {
+  margin-bottom: 0;
+}
 
+h4 {
+  font-weight: 1000;
+}
 
-   
 @media (min-width:769px) and (max-width:1100px) {
-
-  
   .card-detail {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: space-evenly;
   }
-
   .contents-align {
     display: flex;
     flex-direction: row;
@@ -94,26 +88,22 @@
   button {
     margin-left: 4rem;
   }
-img {
-  height: 350px;
-   width: 480px;
-}
+  img {
+    height: 350px;
+    width: 480px;
   }
+}
 
-     
 @media (min-width:577px) and (max-width:768px) {
-
   .card-detail {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-evenly;
   }
-
   .align {
     margin-left: 4rem;
   }
-
   .contents-align {
     display: flex;
     flex-direction: row;
@@ -122,124 +112,105 @@ img {
     align-items: flex-start;
     margin-bottom: 3rem;
   }
-
   button {
     margin-left: 4rem;
   }
-
   img {
     height: 350px;
-     width: 450px;
+    width: 450px;
   }
+}
 
+@media (min-width:320px) and (max-width:577px) {
+  .card-detail {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
   }
-
-  @media (min-width:320px) and (max-width:577px) {
-
-    .card-detail {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      justify-content: space-evenly;
-    }
-  
-    .contents-align {
-      display: flex;
-      flex-direction: column;
-      /* flex-wrap: wrap; */
-      justify-content: flex-start;
-      align-items: flex-start;
-      margin-bottom: 3rem;
-    }
-
-    img {
-      height: 200px;
-      margin-left: 0;
-    }
-
-    /* .align {
-      margin-left: 4rem;
-    } */
-/* 
-    button {
-      margin-left: 4rem;
-    } */
-
-    }
-    @media (min-width:1101px){
-    button {
-      margin-left: 9.5rem;
-    }
-
-    img {
-      height: 350px;
-       width: 480px;
-    }
+  .contents-align {
+    display: flex;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    justify-content: flex-start;
+    align-items: flex-start;
+    margin-bottom: 3rem;
   }
-   
-    .margin-align {
-      margin-right: 1rem;
-    margin-left: 0.5rem;
-    }
-
-    button {
-      border: none;
-      padding-top: 0.3rem;
-      padding-bottom: 0.3rem;
-      padding-right: 1rem;
-      border-radius: 0.3rem;
-    }
-
-    @media (max-width:344px){
-      img {
-        width: 320px;
-        margin-left: 0;
-        margin-right: 0;
-      }
-
-      button {
-        margin-left: none;
-      }
-
-      .align[_ngcontent-txp-c50] {
-        margin-left: none; 
-    }
+  img {
+    height: 200px;
+    margin-left: 0;
   }
+}
 
-    @media (min-width:345px) and (max-width:577px){
-      img {
-         width: 310px;
-      }
-    }
+@media (min-width:1101px) {
+  button {
+    margin-left: 9.5rem;
+  }
+  img {
+    height: 350px;
+    width: 480px;
+  }
+}
 
+.margin-align {
+  margin-right: 1rem;
+  margin-left: 0.5rem;
+}
 
-    .borders {
-     display: flex;
-     flex-direction: row;
-     flex-wrap: wrap;
-     /* justify-content: space-evenly; */
-     align-items: center;
-       }
+button {
+  border: none;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  padding-right: 1rem;
+  border-radius: 0.3rem;
+}
 
-       .border-align {
-        margin-right: 1rem;
-        margin-left: 0.5rem;
-        margin-top: 0.5rem  ;
-       }
+@media (max-width:344px) {
+  img {
+    width: 320px;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  button {
+    margin-left: none;
+  }
+  .align[_ngcontent-txp-c50] {
+    margin-left: none;
+  }
+}
 
-       .card-text {
-         display: flex;
-         flex-wrap: wrap;
-       }
+@media (min-width:345px) and (max-width:577px) {
+  img {
+    width: 310px;
+  }
+}
 
-       .strong-border {
-        margin-top: 0.5rem;
-       }
+.borders {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+}
 
-       .crop > div:last-child > span:last-child {
-         display: none;
-       }
-       
-       strong {
-         margin-right: 0.5rem;
-       }
+.border-align {
+  margin-right: 1rem;
+  margin-left: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.card-text {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.strong-border {
+  margin-top: 0.5rem;
+}
+
+.crop>div:last-child>span:last-child {
+  display: none;
+}
+
+strong {
+  margin-right: 0.5rem;
+}

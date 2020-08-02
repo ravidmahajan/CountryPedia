@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, Input } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+
 import { FilterDropdownService } from './filter-dropdown.service';
 import { ApiConstants } from '../../constants/api-constants';
-import { HttpClient } from '@angular/common/http';
 import { AppService } from 'src/app/app.service';
 
 @Component({
@@ -16,11 +16,6 @@ export class FilterDropdownComponent implements OnInit {
   selectedRegionType: any;
   defaultRegionType: any;
   countryData: any;
-
-  @Input() nightMode : boolean;
-
-  @Output() filteredCountries = new EventEmitter();
-
   regions: any = [
     { id: '0', name: 'All' },
     { id: '0', name: 'Africa' },
@@ -29,9 +24,11 @@ export class FilterDropdownComponent implements OnInit {
     { id: '0', name: 'Europe' },
     { id: '0', name: 'Oceania' }];
 
+  @Input() nightMode: boolean;
+  @Output() filteredCountries = new EventEmitter();
+
   constructor(private filterDropdownService: FilterDropdownService, private http: HttpClient,
     private appService: AppService) { }
-
 
   ngOnInit(): void {
     this.selectedRegionType = this.regions[0];
