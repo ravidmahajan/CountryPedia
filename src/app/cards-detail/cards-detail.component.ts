@@ -12,6 +12,7 @@ import { AppService } from '../app.service';
 })
 export class CardsDetailComponent implements OnInit, OnDestroy {
 
+  countryData: any;
   countryCode: string;
   paramsSubscription: Subscription;
   selectedCountry: any = [];
@@ -22,8 +23,6 @@ export class CardsDetailComponent implements OnInit, OnDestroy {
     private cardsDetailService: CardsDetailService, private appService:AppService) { }
 
   ngOnInit(): void {
-
-    
     this.appService.getMode().subscribe((data)=> {
       this.nightMode = data;
     });
@@ -34,7 +33,7 @@ export class CardsDetailComponent implements OnInit, OnDestroy {
       });
     this.cardsDetailService.getCountryInfo(this.countryCode).subscribe((data) => {
       this.selectedCountry = data;
-      // this.router.navigate(['alpha', data.alpha2Code.toLowerCase()]);
+      console.log("this.selectedCountry =>",this.selectedCountry )
     });
   }
 

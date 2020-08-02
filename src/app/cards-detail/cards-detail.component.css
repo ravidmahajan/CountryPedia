@@ -39,7 +39,9 @@
    }
  
    button {
-       margin: 2rem;
+       margin-right: 2rem;
+       margin-top: 2rem;
+       margin-bottom: 2rem;
    }
 
    .contents-align {
@@ -127,7 +129,7 @@ img {
 
   img {
     height: 350px;
-     width: 480px;
+     width: 450px;
   }
 
   }
@@ -152,17 +154,16 @@ img {
 
     img {
       height: 200px;
-      width: 300px;
+      margin-left: 0;
     }
 
-    .align {
+    /* .align {
       margin-left: 4rem;
-    }
-
+    } */
+/* 
     button {
       margin-left: 4rem;
-
-    }
+    } */
 
     }
     @media (min-width:1101px){
@@ -177,15 +178,68 @@ img {
   }
    
     .margin-align {
-      margin-right: 1.5rem;
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
-      padding-right: 0.5rem;
+      margin-right: 1rem;
+    margin-left: 0.5rem;
     }
 
     button {
       border: none;
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
-      padding-right: 0.5rem;
+      padding-top: 0.3rem;
+      padding-bottom: 0.3rem;
+      padding-right: 1rem;
+      border-radius: 0.3rem;
     }
+
+    @media (max-width:344px){
+      img {
+        width: 320px;
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      button {
+        margin-left: none;
+      }
+
+      .align[_ngcontent-txp-c50] {
+        margin-left: none; 
+    }
+  }
+
+    @media (min-width:345px) and (max-width:577px){
+      img {
+         width: 310px;
+      }
+    }
+
+
+    .borders {
+     display: flex;
+     flex-direction: row;
+     flex-wrap: wrap;
+     /* justify-content: space-evenly; */
+     align-items: center;
+       }
+
+       .border-align {
+        margin-right: 1rem;
+        margin-left: 0.5rem;
+        margin-top: 0.5rem  ;
+       }
+
+       .card-text {
+         display: flex;
+         flex-wrap: wrap;
+       }
+
+       .strong-border {
+        margin-top: 0.5rem;
+       }
+
+       .crop > div:last-child > span:last-child {
+         display: none;
+       }
+       
+       strong {
+         margin-right: 0.5rem;
+       }

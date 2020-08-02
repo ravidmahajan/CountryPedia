@@ -12,6 +12,7 @@ import { SearchPipe } from './utility/pipe/search.pipe';
 import { ShortNamePipe } from './utility/pipe/short-name.pipe'
 import { CardsDetailComponent } from './cards-detail/cards-detail.component';
 import { AppService } from "./app.service";
+import { CardService } from './card/card.service';
 
 const appRoutes: Routes = [
   { path: '', component: CardComponent },
@@ -34,7 +35,7 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
-  providers: [AppService],
+  providers: [AppService, CardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
