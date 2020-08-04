@@ -7,12 +7,21 @@ import { ApiConstants } from '../constants/api-constants';
 @Injectable()
 export class CardService {
 
-private nightMode: BehaviorSubject<boolean>;
+  private countryMap = new Map();
+  private nightMode: BehaviorSubject<boolean>;
 
   constructor(private http: HttpClient) {
   }
 
   getCountriesData(): Observable<any> {
     return this.http.get(ApiConstants.GET_ALL_COUNTRIES);
+  }
+
+  public setCountryMapping(countryCode, countryName) {
+    this.countryMap.set(countryCode, countryName);
+  }
+
+  public getCountryByCode(countryCode) {
+    return this.countryMap.get(countryCode);
   }
 }

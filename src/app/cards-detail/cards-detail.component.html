@@ -47,7 +47,7 @@
             <strong class="strong-border">Border Countries : </strong>
             <span class="border-align" [ngClass]="nightMode? 'nightmode-box': 'lightmode-box'"
               *ngFor="let borderCountry of selectedCountry.borders">
-              {{borderCountry}}</span>
+              {{cardService.getCountryByCode(borderCountry)}}</span>
           </div>
         </div>
         <!-- <p class="card-text"><strong>Border Countries :</strong> {{selectedCountry.borders}}</p> -->

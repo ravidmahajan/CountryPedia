@@ -6,6 +6,7 @@ import { Subscription } from 'rxjs';
 
 import { AppService } from '../app.service';
 import { CardsDetailService } from '../cards-detail/card-detail.service';
+import { CardService } from '../card/card.service';
 
 @Component({
   selector: 'app-cards-detail',
@@ -22,7 +23,8 @@ export class CardsDetailComponent implements OnInit, OnDestroy {
   nightMode: boolean;
 
   constructor(private router: Router, private route: ActivatedRoute, private location: Location,
-    private cardsDetailService: CardsDetailService, private appService: AppService, private SpinnerService: NgxSpinnerService) { }
+    private cardsDetailService: CardsDetailService, private appService: AppService, private SpinnerService: NgxSpinnerService,
+    private cardService: CardService) { }
 
   ngOnInit(): void {
     this.showPage = false;

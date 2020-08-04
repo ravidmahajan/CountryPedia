@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, OnInit, Input, SimpleChanges, OnChanges } from '@angular/core';
 import { NgxSpinnerService } from "ngx-spinner";
+import { tap } from "rxjs/operators";
 
 import { AppService } from '../app.service';
 import { CardService } from './card.service'
@@ -18,7 +19,8 @@ export class CardComponent implements OnInit {
 
   @Output() selectedCountry = new EventEmitter();
 
-  constructor(private cardService: CardService, private appService: AppService, private SpinnerService: NgxSpinnerService) { }
+  constructor(private cardService: CardService, private appService: AppService, private SpinnerService: NgxSpinnerService) {
+  }
 
   ngOnInit() {
     this.showPage = false;
@@ -27,8 +29,11 @@ export class CardComponent implements OnInit {
       this.nightMode = data;
     });
 
-    this.cardService.getCountriesData().subscribe((data: any[]) => {
-
+    this.cardService.getCountriesData().pipe(tap((data: any[]) => {
+      data.forEach((item) => {
+        this.cardService.setCountryMapping(item.alpha3Code, item.name);
+      });
+    })).subscribe((data: any[]) => {
       this.countryData = data;
       this.SpinnerService.hide();
       this.showPage = true;
