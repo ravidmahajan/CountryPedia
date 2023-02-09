@@ -125,6 +125,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "CountryPedia"
+    }
+  },
+  "defaultProject": "CountryPedia",
+  "cli": {
+    "analytics": "f278ca4c-d9d9-45ff-9403-5ac1f1ab62c8"
+  }
 }

@@ -15,6 +15,8 @@ import { CardsDetailComponent } from './cards-detail/cards-detail.component';
 import { AppService } from "./app.service";
 import { CardService } from './card/card.service';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+
 const appRoutes: Routes = [
   { path: '', component: CardComponent },
   { path: 'alpha/:country', component: CardsDetailComponent }
@@ -35,7 +37,8 @@ const appRoutes: Routes = [
     HttpClientModule,
     FormsModule,
     NgxSpinnerModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    BrowserAnimationsModule
   ],
   providers: [AppService, CardService],
   bootstrap: [AppComponent]
