@@ -131,6 +131,8 @@ p {
   padding-right: 3rem;
   padding-left: 3rem;
   padding-top: 3rem;
+  /* background: url('../../assets/background-night.jpg') no-repeat center center fixed;
+  background-size: cover; */
 }
 
 @media (min-width: 545px) and (max-width: 767px) {

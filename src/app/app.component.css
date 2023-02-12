@@ -1,5 +1,6 @@
   .spacer {
     flex: 1;
+    margin-left: 2rem;
   }
 
   .toolbar {
@@ -12,7 +13,7 @@
     align-items: center;
     color: white;
     font-weight: 600;
-    border-bottom: 0.1rem solid black;
+    box-sizing: unset;
   }
 
   .content {

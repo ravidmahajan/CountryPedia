@@ -1,12 +1,12 @@
 
 <div [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'" *ngIf="showPage">
   <!-- Header -->
-
-  <div class="toolbar" [ngClass]="nightMode? 'nightmode-box-shadow': 'lightmode-box-shadow'" role="banner">
-    <div class="spacer"></div>
+  <div class="toolbar" [ngClass]="nightMode? 'nightmode-box-shadow': 'lightmode-box-shadow'" role="banner"
+  [ngStyle]="{'border': nightMode? '0.2rem solid white': '0.2rem solid black'}">
+    <div class="spacer" [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'"><span style="font-family: 'Courier New', cursive; font-size: 40px;">CountryPedia.</span></div>
     <div>
       <span>
-        <i class="fa fa-moon-o" [ngClass]="nightMode? '': 'light-mode-font-color'" aria-hidden="true"></i>
+        <i [ngClass]="nightMode? 'fa fa-sun-o': 'light-mode-font-color fa fa-moon-o'" aria-hidden="true"></i>
       </span>
       <button (click)="appService.setMode(!nightMode)" [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'">{{nightMode? 'Light Mode': 'Dark Mode'}}</button>
     </div>
