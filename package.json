@@ -1,10 +1,10 @@
-{
+﻿{
   "name": "country-pedia",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
+    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider ng serve",
+    "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
@@ -38,6 +38,7 @@
     "@types/d3": "^5.16.5",
     "@types/node": "^12.11.1",
     "codelyzer": "^5.1.2",
+    "cross-env": "^7.0.3",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~5.0.0",
