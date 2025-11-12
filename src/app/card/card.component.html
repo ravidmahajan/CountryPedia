@@ -2,16 +2,13 @@
 <div class="container" [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'" *ngIf="showPage">
   <div>
     <div class="components">
-      <div>
+      <div class="search-container">
         <!-- Search form -->
-        <div>
-          <div>
-            <span class="search-icon" [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'"><i
-                class="fa fa-search"></i></span>
-            <input [ngClass]="nightMode? 'nightmode-box': 'lightmode-box'" placeholder="Search for a country"
-              type="text" [(ngModel)]="searchText">
-          </div>
-
+        <div class="search-wrapper">
+          <span class="search-icon" [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'"><i
+              class="fa fa-search"></i></span>
+          <input class="search-input" [ngClass]="nightMode? 'nightmode-box': 'lightmode-box'" placeholder="Search for a country"
+            type="text" [(ngModel)]="searchText">
         </div>
       </div>
 
@@ -20,23 +17,30 @@
         <app-filter-dropdown (filteredCountries)="populateFilteredData($event)" [nightMode]="nightMode">
         </app-filter-dropdown>
       </div>
+
+      <!-- Navigation to Map -->
+      <div class="nav-to-map">
+        <a routerLink="/map" [ngClass]="nightMode ? 'nightmode-box' : 'lightmode-box'" class="map-nav-button">
+          <i class="fa fa-globe"></i> View World Map
+        </a>
+      </div>
     </div>
 
     <div class="content" role="main">
       <div class="card-container">
         <div class="alignment">
-          <div class="card" target="_blank" rel="noopener" routerLink="/alpha/{{country.alpha2Code.toLowerCase()}}"
+          <div class="card" target="_blank" rel="noopener" routerLink="/alpha/{{country.cca2.toLowerCase()}}"
             *ngFor="let country of countryData | filter: searchText"
             [ngClass]="nightMode ? 'nightmode-box': 'lightmode-box'">
             <div (click)="onCountryClick(country)">
-              <img [src]="country.flag" class="card-img-top" alt="...">
+              <img [src]="country.flags.png" class="card-img-top" alt="...">
               <div class="card-body" [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'">
                 <div>
-                  <p class="card-text">{{country.name | shortName:30}}</p>
+                  <p class="card-text">{{country.name.common | shortName:30}}</p>
                   <br />
                   <p class="card-text">Population : {{country.population}}</p>
                   <p class="card-text">Region : {{country.region}}</p>
-                  <p class="card-text">Capital : {{country.capital}}</p>
+                  <p class="card-text">Capital : {{country.capital && country.capital.length ? country.capital[0] : 'N/A'}}</p>
                 </div>
               </div>
             </div>

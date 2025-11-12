@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { ApiConstants } from '../../constants/api-constants';
 
@@ -12,6 +12,7 @@ export class FilterDropdownService {
   }
 
   getCountriesByRegion(region): Observable<any> {
-    return this.http.get(ApiConstants.COUNTRIES_BY_REGION + region);
+    const params = new HttpParams().set('fields', 'name,flags,cca2,cca3,population,region,subregion,capital');
+    return this.http.get(ApiConstants.COUNTRIES_BY_REGION + region, { params });
   }
 }

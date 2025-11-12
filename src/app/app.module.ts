@@ -12,6 +12,7 @@ import { FilterDropdownComponent } from './utility/filter-dropdown/filter-dropdo
 import { SearchPipe } from './utility/pipe/search.pipe';
 import { ShortNamePipe } from './utility/pipe/short-name.pipe'
 import { CardsDetailComponent } from './cards-detail/cards-detail.component';
+import { MapComponent } from './map/map.component';
 import { AppService } from "./app.service";
 import { CardService } from './card/card.service';
 
@@ -19,8 +20,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 const appRoutes: Routes = [
   { path: '', component: CardComponent },
-  { path: 'alpha/:country', component: CardsDetailComponent }
-]
+  { path: 'home', redirectTo: '', pathMatch: 'full' },
+  { path: 'alpha/:country', component: CardsDetailComponent },
+  { path: 'map', component: MapComponent },
+  { path: '**', redirectTo: '' }
+];
 
 @NgModule({
   declarations: [
@@ -29,7 +33,8 @@ const appRoutes: Routes = [
     FilterDropdownComponent,
     SearchPipe,
     ShortNamePipe,
-    CardsDetailComponent
+    CardsDetailComponent,
+    MapComponent
   ],
   imports: [
     CommonModule,

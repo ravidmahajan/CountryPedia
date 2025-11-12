@@ -12,10 +12,11 @@ export class SearchPipe implements PipeTransform {
     if (!searchText) {
       return items;
     }
-    searchText = searchText.toLocaleLowerCase();
+    searchText = searchText.trim().toLocaleLowerCase();
 
     return items.filter(it => {
-      return it.name.toLocaleLowerCase().includes(searchText);
+      const name = it.name?.common || it.name || '';
+      return name.toLocaleLowerCase().includes(searchText);
     });
   }
 }

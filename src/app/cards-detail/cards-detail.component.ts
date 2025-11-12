@@ -18,7 +18,7 @@ export class CardsDetailComponent implements OnInit, OnDestroy {
   countryData: any;
   countryCode: string;
   paramsSubscription: Subscription;
-  selectedCountry: any = [];
+  selectedCountry: any = {};
   showPage: boolean;
   nightMode: boolean;
 
@@ -40,16 +40,53 @@ export class CardsDetailComponent implements OnInit, OnDestroy {
 
     this.cardsDetailService.getCountryInfo(this.countryCode).subscribe((data) => {
       setTimeout(() => {
-        this.selectedCountry = data;
+        const country = Array.isArray(data) ? data[0] : data;
+        this.selectedCountry = country || {};
         this.SpinnerService.hide();
         this.showPage = true;
-      })
-
+      });
     });
   }
 
   goBack(): void {
     this.location.back();
+  }
+
+  getNativeName(): string {
+    if (!this.selectedCountry.name?.nativeName) {
+      return this.selectedCountry.name?.common || '';
+    }
+    const nativeNames = this.selectedCountry.name.nativeName;
+    const firstKey = Object.keys(nativeNames)[0];
+    return nativeNames[firstKey]?.common || this.selectedCountry.name.common || '';
+  }
+
+  getCapital(): string {
+    if (!this.selectedCountry.capital || this.selectedCountry.capital.length === 0) {
+      return 'N/A';
+    }
+    return this.selectedCountry.capital[0];
+  }
+
+  getTopLevelDomain(): string {
+    if (!this.selectedCountry.tld || this.selectedCountry.tld.length === 0) {
+      return 'N/A';
+    }
+    return this.selectedCountry.tld.join(', ');
+  }
+
+  getCurrencies(): string[] {
+    if (!this.selectedCountry.currencies) {
+      return [];
+    }
+    return Object.values(this.selectedCountry.currencies).map((currency: any) => currency.name);
+  }
+
+  getLanguages(): string[] {
+    if (!this.selectedCountry.languages) {
+      return [];
+    }
+    return Object.values(this.selectedCountry.languages);
   }
 
   ngOnDestroy(): void {

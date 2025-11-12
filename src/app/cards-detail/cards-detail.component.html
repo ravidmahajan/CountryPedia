@@ -8,41 +8,43 @@
   </div>
   <div class="card-detail" [ngClass]="nightMode ? 'night-mode': 'light-mode'">
     <div class="show-image" [ngClass]="nightMode ? 'night-mode': 'light-mode'">
-
-      <img [src]="selectedCountry.flag" alt="{{selectedCountry.flag}}">
+      <img [src]="selectedCountry.flags?.png || selectedCountry.flags?.svg"
+        [alt]="selectedCountry.flags?.alt || selectedCountry.name?.common">
     </div>
     <div class="align">
-      <h4>{{selectedCountry.name}}</h4>
+      <h4>{{selectedCountry.name?.common}}</h4>
+      <div class="flag-inline" *ngIf="selectedCountry.flags">
+        <img [src]="selectedCountry.flags?.png || selectedCountry.flags?.svg"
+          [alt]="selectedCountry.flags?.alt || selectedCountry.name?.common">
+      </div>
       <div>
         <div class="contents-align">
           <div class="margin-space">
-            <p class="card-text"><strong>Native Name :</strong> {{selectedCountry.nativeName}}</p>
+            <p class="card-text"><strong>Native Name :</strong> {{getNativeName()}}</p>
             <p class="card-text"><strong>Population :</strong> {{selectedCountry.population}}</p>
             <p class="card-text"><strong>Region :</strong> {{selectedCountry.region}}</p>
 
             <p class="card-text"><strong>Sub Region :</strong> {{selectedCountry.subregion}}</p>
-            <p class="card-text"><strong>Capital :</strong> {{selectedCountry.capital}}</p>
+            <p class="card-text"><strong>Capital :</strong> {{getCapital()}}</p>
           </div>
           <div>
-            <p class="card-text"><strong>Top Level Domains :</strong> {{selectedCountry.topLevelDomain}}</p>
+            <p class="card-text"><strong>Top Level Domains :</strong> {{getTopLevelDomain()}}</p>
 
             <div class="card-text"><strong>Currencies :</strong>
-              <span *ngFor="let currency of selectedCountry.currencies">
-                {{currency.name}}
+              <span *ngFor="let currency of getCurrencies(); let last = last">
+                {{currency}}<span *ngIf="!last">, </span>
               </span>
             </div>
             <div class="card-text crop"><strong>Languages : </strong>
-              <div *ngFor="let language of selectedCountry.languages">
-                <span>
-                  {{ language.name}} </span>
-                <span>{{',' }} </span>
-              </div>
+              <span *ngFor="let language of getLanguages(); let last = last">
+                {{language}}<span *ngIf="!last">, </span>
+              </span>
             </div>
           </div>
         </div>
       </div>
       <div>
-        <div class="card-text">
+        <div class="card-text" *ngIf="selectedCountry.borders?.length">
           <div class="borders">
             <strong class="strong-border">Border Countries : </strong>
             <span class="border-align" [ngClass]="nightMode? 'nightmode-box': 'lightmode-box'"

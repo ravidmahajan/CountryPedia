@@ -31,10 +31,10 @@ export class CardComponent implements OnInit {
 
     this.cardService.getCountriesData().pipe(tap((data: any[]) => {
       data.forEach((item) => {
-        this.cardService.setCountryMapping(item.alpha3Code, item.name);
+        this.cardService.setCountryMapping(item.cca3, item.name.common);
       });
     })).subscribe((data: any[]) => {
-      this.countryData = data;
+      this.countryData = this.sortCountries(data);
       this.SpinnerService.hide();
       this.showPage = true;
     });
@@ -45,6 +45,18 @@ export class CardComponent implements OnInit {
   }
 
   populateFilteredData(data: any): void {
-    this.countryData = data;
+    this.countryData = this.sortCountries(data);
+  }
+
+  private sortCountries(data: any[]): any[] {
+    if (!Array.isArray(data)) {
+      return [];
+    }
+
+    return [...data].sort((a, b) => {
+      const nameA = a?.name?.common || a?.name || '';
+      const nameB = b?.name?.common || b?.name || '';
+      return nameA.localeCompare(nameB, undefined, { sensitivity: 'base' });
+    });
   }
 }

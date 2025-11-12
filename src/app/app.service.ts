@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { ApiConstants } from './constants/api-constants';
 
@@ -14,7 +14,8 @@ private nightMode: BehaviorSubject<boolean>;
   }
 
   getCountriesData(): Observable<any> {
-    return this.http.get(ApiConstants.GET_ALL_COUNTRIES);
+    const params = new HttpParams().set('fields', 'name,flags,cca2,cca3,population,region,subregion,capital,latlng');
+    return this.http.get(ApiConstants.GET_ALL_COUNTRIES, { params });
   }
 
   public getMode ():Observable<boolean> {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { ApiConstants } from '../constants/api-constants';
 
 @Injectable({
@@ -11,6 +11,7 @@ export class CardsDetailService {
   }
 
   getCountryInfo(country: string): Observable<any> {
+    // For detail page, we need all fields, so don't specify fields parameter to get everything
     return this.http.get(ApiConstants.COUNTRY_DATA + country);
   }
 }

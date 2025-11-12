@@ -39,7 +39,7 @@ export class FilterDropdownComponent implements OnInit {
     const region = e.target.value;
     if (region == 'All') {
       this.appService.getCountriesData().subscribe((data: any[]) => {
-        this.countryData = data;
+        this.filteredCountries.emit(data);
       });
     } else {
       this.filterDropdownService.getCountriesByRegion(region).subscribe((data) => {

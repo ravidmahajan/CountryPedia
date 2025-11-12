@@ -1,0 +1,16 @@
+<div class="map-wrapper" [ngClass]="nightMode ? 'night-mode-color' : 'light-mode-color'">
+  <div class="map-header">
+    <div class="map-header-top">
+      <h2 [ngClass]="nightMode ? 'night-mode-color' : 'light-mode-color'">World Map</h2>
+      <a routerLink="/" [ngClass]="nightMode ? 'nightmode-box' : 'lightmode-box'" class="back-to-home-button">
+        <i class="fa fa-home"></i> Back to Home
+      </a>
+    </div>
+    <p [ngClass]="nightMode ? 'night-mode-color' : 'light-mode-color'">Hover over a country to see its name. Click on a country to view its details.</p>
+  </div>
+  <svg #mapContainer class="map-canvas" [ngClass]="nightMode ? 'map-canvas-dark' : 'map-canvas-light'" role="application" aria-label="Interactive world map"></svg>
+  <div class="map-credits" [ngClass]="nightMode ? 'night-mode-color' : 'light-mode-color'">
+    <small>Map data from <a href="https://www.naturalearthdata.com/" target="_blank" rel="noopener">Natural Earth</a>, powered by <a href="https://d3js.org/" target="_blank" rel="noopener">D3.js</a></small>
+  </div>
+</div>
+
