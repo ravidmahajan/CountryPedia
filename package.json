@@ -1,10 +1,10 @@
-﻿{
+{
   "name": "country-pedia",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider ng serve",
-    "build": "ng build",
+    "build": "ng build --configuration=production",
     "build:local": "cross-env NODE_OPTIONS=--openssl-legacy-provider ng build",
     "test": "ng test",
     "lint": "ng lint",
