@@ -106,7 +106,22 @@ export class MapComponent implements AfterViewInit, OnDestroy {
     // Create SVG
     this.svg = d3.select(element)
       .attr('width', this.width)
-      .attr('height', this.height);
+      .attr('height', this.height)
+      .on('mouseleave', () => {
+        // Hide all tooltips when mouse leaves the map area
+        const tooltip = d3.select('body').select('.map-tooltip');
+        if (tooltip.node()) {
+          tooltip.transition()
+            .duration(150)
+            .style('opacity', 0);
+        }
+        const clickTooltip = d3.select('body').select('.map-click-tooltip');
+        if (clickTooltip.node()) {
+          clickTooltip.transition()
+            .duration(150)
+            .style('opacity', 0);
+        }
+      });
 
     // Create projection (equirectangular for world map)
     this.projection = d3.geoEquirectangular()
@@ -161,16 +176,19 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   }
 
   private createSimpleMap(): void {
-    // Create a simple map using country coordinates from the API
-    if (this.countriesData.length > 0 && this.svg && this.path) {
-      this.drawCountriesFromAPI();
-    }
+    // Markers are disabled - if GeoJSON fails, we'll just show an empty map
+    console.warn('Unable to load GeoJSON data. Map will not display country shapes.');
+    return;
   }
 
   private drawMap(): void {
     if (!this.worldData || !this.svg || !this.path || !this.projection) {
       return;
     }
+
+    // Remove any existing markers before drawing
+    this.svg.selectAll('.country-markers').remove();
+    this.svg.selectAll('.markers').remove();
 
     // Fit projection to the GeoJSON bounds
     this.projection.fitSize([this.width, this.height], this.worldData as any);
@@ -279,10 +297,18 @@ export class MapComponent implements AfterViewInit, OnDestroy {
           .attr('stroke-width', 0.5)
           .style('filter', null);
 
-        // Hide tooltip
+        // Hide hover tooltip
         tooltip.transition()
           .duration(150)
           .style('opacity', 0);
+        
+        // Also hide click tooltip if visible
+        const clickTooltip = d3.select('body').select('.map-click-tooltip');
+        if (clickTooltip.node()) {
+          clickTooltip.transition()
+            .duration(150)
+            .style('opacity', 0);
+        }
       })
       .on('click', function(d: any) {
         const event = d3.event as MouseEvent;
@@ -326,189 +352,15 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   }
 
   private drawCountriesFromAPI(): void {
-    if (!this.svg || !this.path || !this.projection) {
-      return;
-    }
-
-    // Filter countries with valid coordinates and check if they're within bounds
-    const validCountries = this.countriesData.filter((c: any) => {
-      if (!c.latlng || !Array.isArray(c.latlng) || c.latlng.length < 2) {
-        return false;
-      }
-      
-      // Project coordinates
-      const coords = this.projection!([c.latlng[1], c.latlng[0]]);
-      if (!coords) {
-        return false;
-      }
-      
-      // Check if coordinates are within visible bounds (with some padding)
-      const padding = 50;
-      return coords[0] >= -padding && 
-             coords[0] <= this.width + padding && 
-             coords[1] >= -padding && 
-             coords[1] <= this.height + padding;
-    });
-
-    // Get or create tooltip container
-    let tooltip = d3.select('body').select('.map-tooltip').node() 
-      ? d3.select('body').select('.map-tooltip')
-      : d3.select('body').append('div')
-          .attr('class', 'map-tooltip')
-          .style('opacity', 0)
-          .style('position', 'absolute')
-          .style('background-color', 'rgba(0, 0, 0, 0.8)')
-          .style('color', 'white')
-          .style('padding', '8px 12px')
-          .style('border-radius', '4px')
-          .style('font-size', '12px')
-          .style('pointer-events', 'none')
-          .style('z-index', '1000')
-          .style('box-shadow', '0 2px 8px rgba(0,0,0,0.3)');
-
-    // Draw circles for each country based on their coordinates
-    const markers = this.svg.append('g').attr('class', 'markers');
-
-    markers.selectAll('circle')
-      .data(validCountries)
-      .enter()
-      .append('circle')
-      .attr('cx', (d: any) => {
-        const coords = this.projection!([d.latlng[1], d.latlng[0]]);
-        return coords ? coords[0] : 0;
-      })
-      .attr('cy', (d: any) => {
-        const coords = this.projection!([d.latlng[1], d.latlng[0]]);
-        return coords ? coords[1] : 0;
-      })
-      .attr('r', 3)
-      .attr('fill', this.nightMode ? '#ff6b6b' : '#e74c3c')
-      .attr('stroke', '#ffffff')
-      .attr('stroke-width', 1.5)
-      .style('cursor', 'pointer')
-      .on('mouseover', (event: any, d: any) => {
-        d3.select(event.currentTarget)
-          .attr('r', 5)
-          .attr('fill', this.nightMode ? '#ff5252' : '#c0392b')
-          .attr('stroke-width', 2);
-
-        const countryName = d.name?.common || d.name || 'Unknown Country';
-        tooltip.transition()
-          .duration(200)
-          .style('opacity', 1);
-        tooltip.html(countryName)
-          .style('left', (event.pageX + 10) + 'px')
-          .style('top', (event.pageY - 10) + 'px');
-      })
-      .on('mouseout', (event: any) => {
-        d3.select(event.currentTarget)
-          .attr('r', 3)
-          .attr('fill', this.nightMode ? '#ff6b6b' : '#e74c3c')
-          .attr('stroke-width', 1.5);
-
-        tooltip.transition()
-          .duration(200)
-          .style('opacity', 0);
-      })
-      .on('click', (event: any, d: any) => {
-        const code = (d.cca2 || d.cca3 || '').toLowerCase();
-        if (code) {
-          this.router.navigate(['/alpha', code]);
-        }
-      });
+    // Markers are disabled - this method is kept for fallback but doesn't draw anything
+    // If GeoJSON fails to load, we'll just show an empty map rather than dots
+    console.warn('GeoJSON failed to load. Map will not display country shapes.');
+    return;
   }
 
   private addCountryMarkers(): void {
-    if (!this.svg || !this.projection || this.countriesData.length === 0) {
-      return;
-    }
-
-    // Get or create tooltip container
-    let tooltip = d3.select('body').select('.map-tooltip').node() 
-      ? d3.select('body').select('.map-tooltip')
-      : d3.select('body').append('div')
-          .attr('class', 'map-tooltip')
-          .style('opacity', 0)
-          .style('position', 'absolute')
-          .style('background-color', 'rgba(0, 0, 0, 0.8)')
-          .style('color', 'white')
-          .style('padding', '8px 12px')
-          .style('border-radius', '4px')
-          .style('font-size', '12px')
-          .style('pointer-events', 'none')
-          .style('z-index', '1000')
-          .style('box-shadow', '0 2px 8px rgba(0,0,0,0.3)');
-
-    const markers = this.svg.append('g').attr('class', 'country-markers');
-
-    // Filter countries with valid coordinates and check if they're within bounds
-    const validCountries = this.countriesData.filter((c: any) => {
-      if (!c.latlng || !Array.isArray(c.latlng) || c.latlng.length < 2) {
-        return false;
-      }
-      
-      // Project coordinates
-      const coords = this.projection!([c.latlng[1], c.latlng[0]]);
-      if (!coords) {
-        return false;
-      }
-      
-      // Check if coordinates are within visible bounds (with some padding)
-      const padding = 50;
-      return coords[0] >= -padding && 
-             coords[0] <= this.width + padding && 
-             coords[1] >= -padding && 
-             coords[1] <= this.height + padding;
-    });
-
-    markers.selectAll('circle')
-      .data(validCountries)
-      .enter()
-      .append('circle')
-      .attr('cx', (d: any) => {
-        const coords = this.projection!([d.latlng[1], d.latlng[0]]);
-        return coords ? coords[0] : 0;
-      })
-      .attr('cy', (d: any) => {
-        const coords = this.projection!([d.latlng[1], d.latlng[0]]);
-        return coords ? coords[1] : 0;
-      })
-      .attr('r', 3)
-      .attr('fill', this.nightMode ? '#ff6b6b' : '#e74c3c')
-      .attr('stroke', this.nightMode ? '#ffffff' : '#ffffff')
-      .attr('stroke-width', 1.5)
-      .style('cursor', 'pointer')
-      .style('transition', 'r 0.2s ease')
-      .on('mouseover', (event: any, d: any) => {
-        d3.select(event.currentTarget)
-          .attr('r', 5)
-          .attr('fill', this.nightMode ? '#ff5252' : '#c0392b')
-          .attr('stroke-width', 2);
-
-        const countryName = d.name?.common || d.name || 'Unknown Country';
-        tooltip.transition()
-          .duration(200)
-          .style('opacity', 1);
-        tooltip.html(countryName)
-          .style('left', (event.pageX + 10) + 'px')
-          .style('top', (event.pageY - 10) + 'px');
-      })
-      .on('mouseout', (event: any) => {
-        d3.select(event.currentTarget)
-          .attr('r', 3)
-          .attr('fill', this.nightMode ? '#ff6b6b' : '#e74c3c')
-          .attr('stroke-width', 1.5);
-
-        tooltip.transition()
-          .duration(200)
-          .style('opacity', 0);
-      })
-      .on('click', (event: any, d: any) => {
-        const code = (d.cca2 || d.cca3 || '').toLowerCase();
-        if (code) {
-          this.router.navigate(['/alpha', code]);
-        }
-      });
+    // Markers are disabled - this method does nothing
+    return;
   }
 
   private handleCountryClick(feature: GeoJSONFeature): void {
@@ -604,14 +456,8 @@ export class MapComponent implements AfterViewInit, OnDestroy {
   private loadCountries(): void {
     this.countriesSub = this.appService.getCountriesData().subscribe((countries: any[]) => {
       this.countriesData = Array.isArray(countries) ? countries : [];
-      if (this.mapInitialized) {
-        if (this.worldData) {
-          // Markers are disabled - only show country shapes
-          // this.addCountryMarkers();
-        } else {
-          this.drawCountriesFromAPI();
-        }
-      }
+      // Markers are disabled - only show country shapes from GeoJSON
+      // No need to call drawCountriesFromAPI() as markers are not wanted
     });
   }
 
@@ -716,31 +562,26 @@ export class MapComponent implements AfterViewInit, OnDestroy {
           .attr('stroke-width', 0.5)
           .style('filter', null);
 
-        // Hide tooltip
+        // Hide hover tooltip
         const tooltip = d3.select('body').select('.map-tooltip');
         if (tooltip.node()) {
           tooltip.transition()
             .duration(200)
             .style('opacity', 0);
         }
+        
+        // Also hide click tooltip if visible
+        const clickTooltip = d3.select('body').select('.map-click-tooltip');
+        if (clickTooltip.node()) {
+          clickTooltip.transition()
+            .duration(200)
+            .style('opacity', 0);
+        }
       });
 
-    // Update markers
-    this.svg.selectAll('.country-markers circle')
-      .attr('fill', markerFill)
-      .on('mouseover', (event: any, d: any) => {
-        const hoverFill = this.nightMode ? '#ff5252' : '#c0392b';
-        d3.select(event.currentTarget)
-          .attr('r', 5)
-          .attr('fill', hoverFill)
-          .attr('stroke-width', 2);
-      })
-      .on('mouseout', (event: any) => {
-        d3.select(event.currentTarget)
-          .attr('r', 3)
-          .attr('fill', markerFill)
-          .attr('stroke-width', 1.5);
-      });
+    // Remove any existing markers (markers are disabled)
+    this.svg.selectAll('.country-markers').remove();
+    this.svg.selectAll('.markers').remove();
   }
 
   private onResize = (): void => {
