@@ -1,102 +1,148 @@
-  .toolbar {
-    position: relative;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: white;
-    font-weight: 600;
-    box-sizing: unset;
-    padding: 0 2rem;
-    z-index: 1000;
-  }
+.toolbar {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 3rem;
+  z-index: 1000;
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
 
-  .brand-text {
-    font-family: 'Courier New', cursive;
-    font-size: 40px;
+.toolbar-light {
+  background-color: #ffffff;
+  color: #111517;
+  border-bottom: 2px solid #e2e8f0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.toolbar-dark {
+  background-color: #292c37;
+  color: #ffffff;
+  border-bottom: 2px solid #3a414d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+}
+
+.brand-text {
+  font-family: 'Courier New', monospace, cursive;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  color: inherit;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 0.4rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.nav-link-light {
+  color: #111517 !important;
+}
+
+.nav-link-light:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.nav-link-light.active {
+  background-color: rgba(0, 0, 0, 0.08);
+  border-bottom: 2px solid #111517;
+}
+
+.nav-link-dark {
+  color: #ffffff !important;
+}
+
+.nav-link-dark:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+.nav-link-dark.active {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-bottom: 2px solid #ffffff;
+}
+
+.nav-links a i {
+  font-size: 1rem;
+}
+
+.mode-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.mode-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.mode-btn-light {
+  color: #111517;
+}
+
+.mode-btn-light:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.mode-btn-dark {
+  color: #ffffff;
+}
+
+.mode-btn-dark:hover {
+  background-color: rgba(255, 255, 255, 0.12);
+}
+
+@media (max-width: 768px) {
+  .toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
   }
 
   .nav-links {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-  }
-
-  .nav-links a {
-    text-decoration: none;
-    font-weight: 500;
-    color: inherit;
-    padding: 0.5rem 1rem;
-    border-radius: 0.25rem;
-    transition: background-color 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .nav-links a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-
-  .nav-links a i {
-    font-size: 0.9rem;
-  }
-
-  .nav-links a.active {
-    border-bottom: 2px solid currentColor;
+    order: 3;
+    gap: 0.75rem;
+    width: 100%;
   }
 
   .mode-toggle {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
   }
-
-  .content {
-    display: flex;
-    margin: 82px auto 32px;
-    padding: 0 16px;
-    max-width: 960px;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .container {
-    padding-top: 1rem;
-  }
-
-  .light-mode {
-    color: #fff;
-  }
-
-  .night-mode {
-    background-color: #292c37;
-  }
-
-  button {
-    border: none;
-    outline: none;
-  }
-
-  @media (max-width: 768px) {
-    .toolbar {
-      flex-direction: column;
-      align-items: flex-start;
-      height: auto;
-      gap: 0.75rem;
-      padding: 1rem 1.5rem;
-    }
-
-    .nav-links {
-      order: 3;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .mode-toggle {
-      order: 2;
-    }
-  }
+}

@@ -1,58 +1,83 @@
-<div [ngClass]="nightMode ? 'night-mode': 'light-mode'" *ngIf="showPage">
-  <!-- Back Button -->
-  <div>
-    <button (click)="goBack()" [ngClass]="nightMode? 'nightmode-box': 'lightmode-box'"><span>
-        <i class="fa fa-long-arrow-left margin-align" [ngClass]="nightMode? '': 'light-mode-font-color'"
-          aria-hidden="true"></i>
-      </span>Back</button>
+<div class="detail-page-wrapper" [ngClass]="nightMode ? 'night-mode': 'light-mode'" *ngIf="showPage">
+  <!-- Top Action Bar -->
+  <div class="top-bar">
+    <button (click)="goBack()" class="back-button" [ngClass]="nightMode ? 'nightmode-box': 'lightmode-box'">
+      <i class="fa fa-long-arrow-left" [ngClass]="nightMode ? '': 'light-mode-font-color'" aria-hidden="true"></i>
+      <span>Back</span>
+    </button>
   </div>
-  <div class="card-detail" [ngClass]="nightMode ? 'night-mode': 'light-mode'">
-    <div class="show-image" [ngClass]="nightMode ? 'night-mode': 'light-mode'">
+
+  <!-- Main Country Detail Card -->
+  <div class="country-content" [ngClass]="nightMode ? 'night-mode': 'light-mode'">
+    <!-- Flag Section -->
+    <div class="flag-section">
       <img [src]="selectedCountry.flags?.png || selectedCountry.flags?.svg"
-        [alt]="selectedCountry.flags?.alt || selectedCountry.name?.common">
+        [alt]="selectedCountry.flags?.alt || selectedCountry.name?.common"
+        class="main-flag-img"
+        (error)="onFlagError($event)">
+
+      <!-- Wikipedia Link Button -->
+      <a *ngIf="selectedCountry.links?.wikipedia"
+        [href]="selectedCountry.links.wikipedia"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="wiki-link-btn"
+        [ngClass]="nightMode ? 'nightmode-box': 'lightmode-box'">
+        <i class="fa fa-external-link"></i> View on Wikipedia
+      </a>
     </div>
-    <div class="align">
-      <h4>{{selectedCountry.name?.common}}</h4>
-      <div class="flag-inline" *ngIf="selectedCountry.flags">
-        <img [src]="selectedCountry.flags?.png || selectedCountry.flags?.svg"
-          [alt]="selectedCountry.flags?.alt || selectedCountry.name?.common">
+
+    <!-- Info Section -->
+    <div class="info-section">
+      <h2 class="country-title">{{selectedCountry.name?.common}}</h2>
+
+      <!-- Wikipedia Description Box -->
+      <div class="description-card" *ngIf="countryDescription" [ngClass]="nightMode ? 'desc-dark' : 'desc-light'">
+        <p class="description-text">{{countryDescription}}</p>
       </div>
-      <div>
-        <div class="contents-align">
-          <div class="margin-space">
-            <p class="card-text"><strong>Native Name :</strong> {{getNativeName()}}</p>
-            <p class="card-text"><strong>Population :</strong> {{selectedCountry.population}}</p>
-            <p class="card-text"><strong>Region :</strong> {{selectedCountry.region}}</p>
 
-            <p class="card-text"><strong>Sub Region :</strong> {{selectedCountry.subregion}}</p>
-            <p class="card-text"><strong>Capital :</strong> {{getCapital()}}</p>
+      <div class="info-grid">
+        <!-- Column 1 -->
+        <div class="info-col">
+          <p class="info-item"><strong>Native Name:</strong> {{getNativeName()}}</p>
+          <p class="info-item"><strong>Population:</strong> {{selectedCountry.population | number}}</p>
+          <p class="info-item"><strong>Region:</strong> {{selectedCountry.region || 'N/A'}}</p>
+          <p class="info-item"><strong>Sub Region:</strong> {{selectedCountry.subregion || 'N/A'}}</p>
+          <p class="info-item"><strong>Capital:</strong> {{getCapital()}}</p>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="info-col">
+          <p class="info-item"><strong>Top Level Domain:</strong> {{getTopLevelDomain()}}</p>
+          <div class="info-item">
+            <strong>Currencies:</strong>
+            <span *ngFor="let currency of getCurrencies(); let last = last">
+              {{currency}}<span *ngIf="!last">, </span>
+            </span>
+            <span *ngIf="!getCurrencies().length">N/A</span>
           </div>
-          <div>
-            <p class="card-text"><strong>Top Level Domains :</strong> {{getTopLevelDomain()}}</p>
-
-            <div class="card-text"><strong>Currencies :</strong>
-              <span *ngFor="let currency of getCurrencies(); let last = last">
-                {{currency}}<span *ngIf="!last">, </span>
-              </span>
-            </div>
-            <div class="card-text crop"><strong>Languages : </strong>
-              <span *ngFor="let language of getLanguages(); let last = last">
-                {{language}}<span *ngIf="!last">, </span>
-              </span>
-            </div>
+          <div class="info-item">
+            <strong>Languages:</strong>
+            <span *ngFor="let language of getLanguages(); let last = last">
+              {{language}}<span *ngIf="!last">, </span>
+            </span>
+            <span *ngIf="!getLanguages().length">N/A</span>
           </div>
         </div>
       </div>
-      <div>
-        <div class="card-text" *ngIf="selectedCountry.borders?.length">
-          <div class="borders">
-            <strong class="strong-border">Border Countries : </strong>
-            <span class="border-align" [ngClass]="nightMode? 'nightmode-box': 'lightmode-box'"
-              *ngFor="let borderCountry of selectedCountry.borders">
-              {{cardService.getCountryByCode(borderCountry)}}</span>
-          </div>
+
+      <!-- Border Countries -->
+      <div class="border-section" *ngIf="selectedCountry.borders?.length">
+        <strong class="border-label">Border Countries:</strong>
+        <div class="border-badges">
+          <a class="border-badge"
+            [routerLink]="['/alpha', borderCountry.toLowerCase()]"
+            [ngClass]="nightMode ? 'nightmode-box': 'lightmode-box'"
+            *ngFor="let borderCountry of selectedCountry.borders">
+            {{cardService.getCountryByCode(borderCountry)}}
+          </a>
         </div>
-        <!-- <p class="card-text"><strong>Border Countries :</strong> {{selectedCountry.borders}}</p> -->
       </div>
     </div>
   </div>
+</div>

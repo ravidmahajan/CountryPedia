@@ -29,18 +29,21 @@
     <div class="content" role="main">
       <div class="card-container">
         <div class="alignment">
-          <div class="card" target="_blank" rel="noopener" routerLink="/alpha/{{country.cca2.toLowerCase()}}"
+          <div class="card" target="_blank" rel="noopener" routerLink="/alpha/{{country.cca2 ? country.cca2.toLowerCase() : country.name.common.toLowerCase()}}"
             *ngFor="let country of countryData | filter: searchText"
             [ngClass]="nightMode ? 'nightmode-box': 'lightmode-box'">
-            <div (click)="onCountryClick(country)">
-              <img [src]="country.flags.png" class="card-img-top" alt="...">
+            <div class="card-inner" (click)="onCountryClick(country)">
+              <div class="card-img-wrapper">
+                <img [src]="country.flags?.png || country.flags?.svg" class="card-img-top" [alt]="country.name?.common" (error)="onFlagError($event, country)">
+              </div>
               <div class="card-body" [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'">
-                <div>
-                  <p class="card-text">{{country.name.common | shortName:30}}</p>
-                  <br />
-                  <p class="card-text">Population : {{country.population}}</p>
-                  <p class="card-text">Region : {{country.region}}</p>
-                  <p class="card-text">Capital : {{country.capital && country.capital.length ? country.capital[0] : 'N/A'}}</p>
+                <div class="card-info">
+                  <h5 class="card-title">{{country.name?.common | shortName:24}}</h5>
+                  <div class="card-details">
+                    <p class="card-text"><span>Population :</span> {{country.population}}</p>
+                    <p class="card-text"><span>Region :</span> {{country.region || 'N/A'}}</p>
+                    <p class="card-text"><span>Capital :</span> {{country.capital && country.capital.length ? country.capital[0] : 'N/A'}}</p>
+                  </div>
                 </div>
               </div>
             </div>

@@ -1,30 +1,26 @@
-
 <div [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'" *ngIf="showPage">
   <!-- Header -->
-  <div class="toolbar" [ngClass]="nightMode? 'nightmode-box-shadow': 'lightmode-box-shadow'" role="banner"
-    [ngStyle]="{'border': nightMode? '0.2rem solid white': '0.2rem solid black'}">
-    <div class="brand" [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'">
+  <header class="toolbar" [ngClass]="nightMode? 'toolbar-dark': 'toolbar-light'" role="banner">
+    <div class="brand">
       <span class="brand-text">CountryPedia.</span>
     </div>
-    <nav class="nav-links">
-      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-        <i class="fa fa-home"></i> Home
+    <nav class="nav-links" aria-label="Main Navigation">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" [ngClass]="nightMode ? 'nav-link-dark' : 'nav-link-light'">
+        <i class="fa fa-home" aria-hidden="true"></i> Home
       </a>
-      <a routerLink="/map" routerLinkActive="active">
-        <i class="fa fa-globe"></i> World Map
+      <a routerLink="/map" routerLinkActive="active" [ngClass]="nightMode ? 'nav-link-dark' : 'nav-link-light'">
+        <i class="fa fa-globe" aria-hidden="true"></i> World Map
       </a>
     </nav>
     <div class="mode-toggle">
-      <span>
-        <i [ngClass]="nightMode? 'fa fa-sun-o': 'light-mode-font-color fa fa-moon-o'" aria-hidden="true"></i>
-      </span>
-      <button (click)="appService.setMode(!nightMode)" [ngClass]="nightMode? 'night-mode-color': 'light-mode-color'">
-        {{nightMode? 'Light Mode': 'Dark Mode'}}
+      <button (click)="appService.setMode(!nightMode)" class="mode-toggle-btn" [ngClass]="nightMode? 'mode-btn-dark': 'mode-btn-light'" [attr.aria-label]="nightMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'">
+        <i [ngClass]="nightMode? 'fa fa-sun-o': 'fa fa-moon-o'" aria-hidden="true"></i>
+        <span>{{nightMode? 'Light Mode': 'Dark Mode'}}</span>
       </button>
     </div>
-  </div>
+  </header>
 </div>
 <ngx-spinner bdColor="rgba(51, 51, 51, 0.8)" size="default" type="ball-spin-clockwise">  
   <p style="color: white">Please Wait. </p>  
-  </ngx-spinner>   
+</ngx-spinner>   
 <router-outlet></router-outlet>

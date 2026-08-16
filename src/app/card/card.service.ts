@@ -1,28 +1,31 @@
 import { Injectable } from '@angular/core';
-import { Observable, BehaviorSubject } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
-
-import { ApiConstants } from '../constants/api-constants';
+import { Observable } from 'rxjs';
+import { AppService } from '../app.service';
+import { NormalizedCountry } from '../utility/country-adapter';
 
 @Injectable()
 export class CardService {
 
-  private countryMap = new Map();
-  private nightMode: BehaviorSubject<boolean>;
+  private countryMap = new Map<string, string>();
 
-  constructor(private http: HttpClient) {
+  constructor(private appService: AppService) {
   }
 
-  getCountriesData(): Observable<any> {
-    const params = new HttpParams().set('fields', 'name,flags,cca2,cca3,population,region,subregion,capital');
-    return this.http.get(ApiConstants.GET_ALL_COUNTRIES, { params });
+  getCountriesData(): Observable<NormalizedCountry[]> {
+    return this.appService.getCountriesData();
   }
 
-  public setCountryMapping(countryCode, countryName) {
-    this.countryMap.set(countryCode, countryName);
+  public setCountryMapping(countryCode: string, countryName: string) {
+    if (countryCode && countryName) {
+      this.countryMap.set(countryCode.toUpperCase(), countryName);
+    }
   }
 
-  public getCountryByCode(countryCode) {
-    return this.countryMap.get(countryCode);
+  public getCountryByCode(countryCode: string): string {
+    if (!countryCode) {
+      return '';
+    }
+    const code = countryCode.toUpperCase();
+    return this.countryMap.get(code) || countryCode;
   }
 }

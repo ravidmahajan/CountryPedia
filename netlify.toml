@@ -3,6 +3,13 @@
   publish = "dist/CountryPedia"
 
 [[redirects]]
+  from = "/countries/v5/*"
+  to = "https://api.restcountries.com/countries/v5/:splat"
+  status = 200
+  force = true
+  headers = { Authorization = "Bearer rc_live_d80a3f2292cd46dcba060e5467fa776e" }
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
@@ -10,4 +17,3 @@
 [build.environment]
   NODE_VERSION = "16.20.2"
   NPM_FLAGS = "--legacy-peer-deps"
-

@@ -1,0 +1,10 @@
+{
+  "/countries/v5": {
+    "target": "https://api.restcountries.com",
+    "secure": true,
+    "changeOrigin": true,
+    "headers": {
+      "Authorization": "Bearer rc_live_d80a3f2292cd46dcba060e5467fa776e"
+    }
+  }
+}

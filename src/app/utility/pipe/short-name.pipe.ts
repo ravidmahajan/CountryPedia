@@ -4,10 +4,14 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'shortName'
 })
 export class ShortNamePipe implements PipeTransform {
-  transform(value: any, limit: number) {
-    if (value.length > limit) {
-      return value.substr(0, limit) + ' ...';
+  transform(value: any, limit: number): string {
+    if (!value) {
+      return '';
     }
-    return value;
+    const str = typeof value === 'string' ? value : String(value);
+    if (str.length > limit) {
+      return str.substr(0, limit) + ' ...';
+    }
+    return str;
   }
 }
